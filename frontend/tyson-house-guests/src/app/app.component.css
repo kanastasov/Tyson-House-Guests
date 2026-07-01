@@ -1,0 +1,167 @@
+/* Core Styling & Modern Reset */
+:root {
+    --primary-color: #1a3636;
+    /* Premium Deep Forest Slate */
+    --accent-color: #c7a87e;
+    /* Elegant Warm Gold/Champagne */
+    --text-dark: #2c3e50;
+    /* Polished Off-Black */
+    --text-muted: #626262;
+    /* Refined Gray */
+    --bg-light: #f9f8f6;
+    /* Soft Cream/Off-White */
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-light);
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    font-family: 'Playfair Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Elegant Premium Header */
+.main-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.main-header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.main-header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Clean Professional Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 40px;
+}
+
+/* Luxury Property Cards */
+.card {
+    background: #ffffff;
+    border-radius: 0px;
+    /* Sharp, modern high-end architectural look */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(26, 54, 54, 0.08);
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+    background-color: #eaeaea;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .card-img {
+    transform: scale(1.04);
+}
+
+/* Premium Tag overlay (e.g., "Guest Favorite" or "Entire House") */
+.property-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(26, 54, 54, 0.9);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Card Content Typography */
+.card-content {
+    padding: 28px;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.card-content p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+/* Subtle Link Button */
+.details-link {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+.details-link:hover {
+    color: var(--primary-color);
+}
+/* Стил за главната снимка на къщата */
+.house-hero-wrapper {
+    width: 100%;
+    max-height: 480px;
+    margin-top: 35px;
+    overflow: hidden;
+    border-radius: 4px;
+    /* Изчистена архитектурна линия */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.house-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 35px;
+    text-align: center;
+}

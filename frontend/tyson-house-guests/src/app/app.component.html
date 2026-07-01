@@ -1,0 +1,59 @@
+<div class="app-container">
+  <!-- House Identity Header -->
+  <header class="main-header">
+    <span class="sub-badge">Самостоятелен етаж от къща</span>
+    <h1>Гостоприемният Втори Етаж</h1>
+    <p>Предлагаме под наем целия втори етаж от къщата — напълно самостоятелно пространство от 3 обзаведени стаи,
+      кухненски кът и собствена баня. Идеално за семейства или компании до 7 души.</p>
+
+    <!-- Снимка на цялата къща отвън -->
+    <div class="house-hero-wrapper">
+      <img src="assets/main-house.jpg" alt="Снимка на цялата къща" class="house-hero-img">
+    </div>
+  </header>
+
+  <!-- Curated Spaces Grid (Спални + Кухня + Баня) -->
+  <h2 class="section-title">Разпределение на помещенията</h2>
+  <main class="card-grid">
+    <div class="card" *ngFor="let space of features">
+      <div class="image-wrapper">
+        <span class="property-tag">{{ space.category }}</span>
+        <img [src]="space.imageUrl" [alt]="space.title" class="card-img">
+      </div>
+      <div class="card-content">
+        <div class="card-meta">{{ space.specs }}</div>
+        <h3>{{ space.title }}</h3>
+        <p>{{ space.description }}</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Guest House Quick Facts Section -->
+  <section class="house-logistics">
+    <h2>Общи удобства и спортни активности</h2>
+    <div class="logistics-grid">
+      <div class="logistics-item">
+        <h4>Спортна зона, Дартц и (Фитнес кът)</h4>
+        <p>На разположение на гостите има обособена зона за тренировки, оборудвана с лежанка, гири и боксов чувал за
+          поддържане на перфектна форма.</p>
+      </div>
+      <div class="logistics-item">
+        <h4>Безплатен тенис на корт</h4>
+        <p>В селото има тенис корт с напълно безплатен достъп. Можем да осигурявам хилки и топки, за да се
+          насладите на играта по всяко време.</p>
+      </div>
+      <div class="logistics-item">
+        <h4>WiFi и Климатик</h4>
+        <p>Осигурен е бърз и безплатен Wi-Fi на целия етаж. Тройната стая разполага с климатик, който лесно охлажда
+          цялата стая.</p>
+      </div>
+      <div class="logistics-item">
+        <h4>Паркинг и уединение</h4>
+        <p>Наемате целия етаж самостоятелно. Къщата се намира в спокоен район и предлага безплатни паркоместа в
+          затворения двор.</p>
+      </div>
+    </div>
+  </section>
+
+  <router-outlet></router-outlet>
+</div>
