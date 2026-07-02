@@ -25,10 +25,105 @@ body {
     font-family: 'Playfair Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Elegant Premium Header */
 .main-header {
     text-align: center;
-    margin-bottom: 60px;
+    padding: 60px 20px 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.header-content {
+    max-width: 750px;
+    margin: 0 auto 40px auto;
+}
+
+/* Модерна значка над заглавието */
+.sub-badge {
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #c7a87e;
+    /* Елегантен златист/бежов тон */
+    background-color: rgba(199, 168, 126, 0.1);
+    padding: 6px 16px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Основно заглавие - Архитектурен стил */
+.hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3rem;
+    /* Голям, впечатляващ шрифт */
+    font-weight: 700;
+    color: #1a3636;
+    /* Твоето луксозно тъмно зелено */
+    line-height: 1.2;
+    margin: 0 0 15px 0;
+}
+
+/* Фина разделителна линия под заглавието за премиум усещане */
+.title-divider {
+    width: 60px;
+    height: 3px;
+    background-color: #c7a87e;
+    margin: 0 auto 25px auto;
+    border-radius: 2px;
+}
+
+/* Описание */
+.hero-description {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.2rem;
+    color: #5a6e6e;
+    /* Мек, неутрален цвят, който не натоварва окото */
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Акцентиране върху ключовите думи */
+.hero-description strong {
+    color: #1a3636;
+    font-weight: 600;
+}
+/* 
+.house-hero-wrapper {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(26, 54, 54, 0.08);
+    background-color: #ffffff;
+} */
+
+.house-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* .house-hero-wrapper:hover .house-hero-img {
+    transform: scale(1.015);
+} */
+
+/* Адаптивност за по-малки екрани (Телефони) */
+@media (max-width: 600px) {
+    .main-header {
+        padding: 40px 15px 25px 15px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        /* Смаляваме заглавието на телефон, за да не се пречупва грозно */
+    }
+
+    .hero-description {
+        font-size: 1.05rem;
+    }
 }
 
 .main-header h1 {
@@ -142,15 +237,22 @@ body {
 .details-link:hover {
     color: var(--primary-color);
 }
-/* Стил за главната снимка на къщата */
 .house-hero-wrapper {
     width: 100%;
-    max-height: 480px;
-    margin-top: 35px;
+    height: auto;
+    max-height: none;
+    border-radius: 16px;
     overflow: hidden;
-    border-radius: 4px;
-    /* Изчистена архитектурна линия */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 40px rgba(26, 54, 54, 0.08);
+    background-color: #ffffff;
+    margin-top: 35px;
+}
+
+.house-hero-img {
+    width: 70%;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
 .house-hero-img {
