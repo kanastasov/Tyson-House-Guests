@@ -113,16 +113,29 @@ body {
 /* Адаптивност за по-малки екрани (Телефони) */
 @media (max-width: 600px) {
     .main-header {
-        padding: 40px 15px 25px 15px;
+        padding: 30px 15px 20px 15px;
     }
 
+    /* Намаляваме размера и гарантираме, че няма да излезе извън екрана */
     .hero-title {
-        font-size: 2rem;
-        /* Смаляваме заглавието на телефон, за да не се пречупва грозно */
+        font-size: 1.8rem !important;
+        /* Намаляваме на 1.8rem, за да се събере на един или два чисти реда */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        padding: 0 10px;
     }
 
     .hero-description {
-        font-size: 1.05rem;
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 0 5px;
+    }
+
+    /* Оправяме и значката над заглавието да не е твърде голяма */
+    .sub-badge {
+        font-size: 0.75rem;
+        padding: 4px 12px;
     }
 }
 
