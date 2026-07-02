@@ -358,8 +358,6 @@ body {
 
 /* Стилове за секцията със социални мрежи */
 .social-links {
-  margin-top: 30px;
-  padding-top: 20px;
   border-top: 1px dashed var(--border-subtle);
 }
 
@@ -630,5 +628,42 @@ body {
         text-align: center;
         padding: 15px;
         margin: 20px 15px 5px 15px;
+    }
+}
+
+/* Новите стилове за детайлите около цената */
+.price-per-person {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    color: #c7a87e;
+    /* Елегантен златист цвят */
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.price-promo {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    color: #1a3636;
+        margin-bottom: 22px;
+    /* Увеличено отстояние, за да не се лепи за горния текст */
+    background-color: rgba(26, 54, 54, 0.05);
+    padding: 6px 10px;
+    /* Малко повече вътрешно пространство за по-добър вид */
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.price-promo strong {
+    color: #d32f2f;
+    /* Лек червен или по-ярък акцент за промоцията */
+    font-weight: 700;
+}
+
+/* Малка корекция за десктоп, за да има място за допълнителния текст */
+@media (min-width: 768px) {
+    .price-box {
+        min-width: 260px;
+        /* Увеличаваме широчината на сектора за цената */
     }
 }
