@@ -575,3 +575,47 @@ body {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+/* Стил за банера "Очаквайте скоро" */
+.coming-soon-banner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(199, 168, 126, 0.08);
+    /* Нежен златист нюанс */
+    border: 1px dashed #c7a87e;
+    /* Фина пунктирана рамка за акцент */
+    border-radius: 12px;
+    padding: 16px 24px;
+    max-width:950px;
+    margin: 30px auto 10px auto;
+    /* Центриране и отстояния */
+    text-align: left;
+}
+
+.banner-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.banner-text {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.05rem;
+    color: #1a3636;
+    /* Твоето тъмно зелено */
+    line-height: 1.5;
+}
+
+.banner-text strong {
+    font-weight: 600;
+}
+
+/* Адаптивност за мобилни телефони */
+@media (max-width: 600px) {
+    .coming-soon-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        margin: 20px 15px 5px 15px;
+    }
+}
