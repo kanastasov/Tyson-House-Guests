@@ -8,7 +8,7 @@
 
     <!-- Снимка на цялата къща отвън -->
     <div class="house-hero-wrapper">
-      <img src="assets/main-house.jpg" alt="Снимка на цялата къща" class="house-hero-img">
+      <img src="assets/main.jpg" alt="Снимка на цялата къща" class="house-hero-img">
     </div>
   </header>
 
@@ -19,6 +19,7 @@
       <div class="image-wrapper">
         <span class="property-tag">{{ space.category }}</span>
         <img [src]="space.imageUrl" [alt]="space.title" class="card-img">
+        <img *ngIf="space.hoverImageUrl" [src]="space.hoverImageUrl" [alt]="space.title" class="card-img hover-img">
       </div>
       <div class="card-content">
         <div class="card-meta">{{ space.specs }}</div>
