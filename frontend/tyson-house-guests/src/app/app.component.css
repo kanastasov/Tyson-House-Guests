@@ -203,3 +203,201 @@ body {
     opacity: 1;
     transform: scale(1.03);
 }
+
+/* Стил за контейнера с цената */
+.price-container {
+    background-color: #f9f8f6;
+    /* Мек фон, който контрастира на бялата карта */
+    padding: 15px 25px;
+    border-radius: 4px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 30px;
+    border: 1px dashed var(--accent-color);
+    /* Стилен акцент около цената */
+}
+
+.price-label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.price-amount {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.price-amount small {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+/* Стилове за секцията със социални мрежи */
+.social-links {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.social-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 15px !important;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.social-icon.fb {
+  color: #1877f2;
+  background-color: rgba(24, 119, 242, 0.08);
+}
+.social-icon.fb:hover {
+  background-color: #1877f2;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.social-icon.ig {
+  color: #e1306c;
+  background-color: rgba(225, 48, 108, 0.08);
+}
+.social-icon.ig:hover {
+  background-color: #e1306c;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.social-icon.tt {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.social-icon.tt:hover {
+  background-color: #000000;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Контейнер за бутоните */
+.contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 440px;
+    margin: 0 auto 25px auto;
+    width: 100%;
+}
+
+/* Основна споделена стилизация за двата бутона */
+.btn-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px;
+    border-radius: 12px;
+    /* Модерни заоблени краища */
+    text-decoration: none;
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ефекти при задържане на мишката (Hover) */
+.btn-contact:hover {
+    transform: translateY(-3px);
+    /* Леко повдигане */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn-contact:active {
+    transform: translateY(-1px);
+}
+
+/* Големина на иконките (емоджитата) */
+.btn-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+/* Текстове вътре в бутоните */
+.btn-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn-number,
+.btn-subtext {
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 2px;
+}
+
+/* ИНДИВИДУАЛЕН СТИЛ ЗА БУТОНА ЗА ОБАЖДАНЕ (Елегантно тъмно зелено/Premium Slate) */
+.phone-btn {
+    background: linear-gradient(135deg, #1a3636, #2c4e4e);
+    /* Луксозен преливащ цвят */
+    color: #ffffff;
+    border: none;
+}
+
+.phone-btn:hover {
+    background: linear-gradient(135deg, #244949, #376161);
+}
+
+/* ИНДИВИДУАЛЕН СТИЛ ЗА БУТОНА ЗА ЧАТ (Стилен контрастен дизайн с акцентен цвят) */
+.chat-btn {
+    background-color: #ffffff;
+    color: #1a3636;
+    border: 2px solid #1a3636;
+}
+
+.chat-btn:hover {
+    background-color: #f9f8f6;
+    border-color: #c7a87e;
+    /* Променя границата към златисто при ховър */
+    color: #c7a87e;
+}
+
+/* Подреждане в две колони на по-големи екрани (Таблети и компютри) */
+@media (min-width: 600px) {
+    .contact-buttons {
+        flex-direction: row;
+        max-width: 100%;
+    }
+
+    .btn-contact {
+        flex: 1;
+        max-width: 260px;
+        height: 90px;
+        /* Фиксирана височина за еднаквост */
+    }
+}
+

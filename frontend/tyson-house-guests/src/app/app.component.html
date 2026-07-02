@@ -1,18 +1,15 @@
 <div class="app-container">
-  <!-- House Identity Header -->
   <header class="main-header">
     <span class="sub-badge">Самостоятелен етаж от къща</span>
     <h1>Гостоприемният Втори Етаж</h1>
     <p>Предлагаме под наем целия втори етаж от къщата — напълно самостоятелно пространство от 3 обзаведени стаи,
       кухненски кът и собствена баня. Идеално за семейства или компании до 7 души.</p>
 
-    <!-- Снимка на цялата къща отвън -->
     <div class="house-hero-wrapper">
       <img src="assets/main.jpg" alt="Снимка на цялата къща" class="house-hero-img">
     </div>
   </header>
 
-  <!-- Curated Spaces Grid (Спални + Кухня + Баня) -->
   <h2 class="section-title">Разпределение на помещенията</h2>
   <main class="card-grid">
     <div class="card" *ngFor="let space of features">
@@ -29,19 +26,18 @@
     </div>
   </main>
 
-  <!-- Guest House Quick Facts Section -->
   <section class="house-logistics">
     <h2>Общи удобства и спортни активности</h2>
     <div class="logistics-grid">
       <div class="logistics-item">
-        <h4>Спортна зона, Дартц и (Фитнес кът)</h4>
+        <h4>Спортна зона, Дартс и Фитнес кът</h4>
         <p>На разположение на гостите има обособена зона за тренировки, оборудвана с лежанка, гири и боксов чувал за
           поддържане на перфектна форма.</p>
       </div>
       <div class="logistics-item">
         <h4>Безплатен тенис на корт</h4>
-        <p>В селото има тенис корт с напълно безплатен достъп. Можем да осигурявам хилки и топки, за да се
-          насладите на играта по всяко време.</p>
+        <p>В селото има тенис корт с напълно безплатен достъп. Можем да осигурим хилки и топки, за да се насладите на
+          играта по всяко време.</p>
       </div>
       <div class="logistics-item">
         <h4>WiFi и Климатик</h4>
@@ -53,6 +49,51 @@
         <p>Наемате целия етаж самостоятелно. Къщата се намира в спокоен район и предлага безплатни паркоместа в
           затворения двор.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-card">
+      <span class="contact-badge">Резервации и въпроси</span>
+      <h2>Свържете се с нас</h2>
+      <p>Имате въпроси за свободни дати или искате да резервирате целия етаж? На разположение сме по телефон или чат
+        приложения.</p>
+
+      <div class="price-container">
+        <span class="price-label">Цена за целия етаж:</span>
+        <span class="price-amount">70€ <small>/ нощувка</small></span>
+      </div>
+
+      <div class="contact-buttons">
+        <a href="tel:+359879260460" class="btn-contact phone-btn">
+          <span class="btn-icon">📞</span>
+          <span class="btn-text">Обади се сега</span>
+          <span class="btn-number">+359 879 260 460</span>
+        </a>
+      
+        <a href="https://wa.me/359879260460" target="_blank" class="btn-contact chat-btn">
+          <span class="btn-icon">💬</span>
+          <span class="btn-text">Пиши ни в чата</span>
+          <span class="btn-subtext">Viber / WhatsApp</span>
+        </a>
+      </div>
+
+      <div class="social-links">
+        <p class="social-title">Свържете се с нас в социалните мрежи:</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/kiril.anastasoff.77" target="_blank" class="social-icon fb" title="Facebook">
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/anastasoffkiril/" target="_blank" class="social-icon ig" title="Instagram">
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@kirilanastasoff" target="_blank" class="social-icon tt" title="TikTok">
+            TikTok
+          </a>
+        </div>
+      </div>
+
+      <p class="host-name">Домакин: Кирил</p>
     </div>
   </section>
 
