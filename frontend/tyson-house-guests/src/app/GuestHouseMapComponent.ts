@@ -9,7 +9,7 @@ import { environment } from '../environments/environment.prod';
       <h3 style="text-align: center; margin-bottom: 20px; font-size: 1.8rem;">Къде се намираме</h3>
       
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-        <div #mapContainer style="display: block; width: 100%; height: 450px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background-color: #f0f0f0;"></div>
+        <div #mapContainer style="display: block; width: 100%; height: 450px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background-color: #e5e3df;"></div>
         
         <div style="display: flex; flex-direction: column; justify-content: center;">
           <h4 style="font-size: 1.4rem; margin-bottom: 10px;">Точни Координати</h4>
@@ -33,37 +33,40 @@ import { environment } from '../environments/environment.prod';
     </div>
   `
 })
-// Променяме интерфейса на AfterViewInit
 export class GuestHouseMapComponent implements AfterViewInit {
   @ViewChild('mapContainer', { static: false }) mapElement!: ElementRef;
 
-  // Използваме ngAfterViewInit вместо ngOnInit
-  async ngAfterViewInit() {
+async ngAfterViewInit() {
     try {
-      const { Loader } = await import('@googlemaps/js-api-loader');
+      // 1. Импортираме новите функции директно от модула
+      const { setOptions, importLibrary } = await import('@googlemaps/js-api-loader');
       
-      const loader = new Loader({
-        apiKey: environment.googleMapsApiKey, 
+      // 2. Слагаме опциите, като ги кастваме към 'any', за да не гърми TS за 'version' или 'apiKey'
+      setOptions({
+        apiKey: environment.googleMapsApiKey,
         version: 'weekly'
-      });
+      } as any);
 
-      const google = await (loader as any).load();
+      // 3. Зареждаме библиотеките асинхронно
+      const { Map } = await importLibrary('maps') as any;
+      const { Marker } = await importLibrary('marker') as any;
       
-      // Точните десетични координати за 41°37'28.9"N 23°11'21.8"E
+      // Точните десетични координати за имота в Микрево
       const propertyLocation = { lat: 41.624694, lng: 23.189389 };
 
-      // Вече сме сигурни, че mapElement.nativeElement съществува в DOM
-      const map = new google.maps.Map(this.mapElement.nativeElement, {
+      // 4. Инициализираме картата
+      const map = new Map(this.mapElement.nativeElement, {
         center: propertyLocation,
         zoom: 16,
       });
 
-      new google.maps.Marker({
+      // 5. Поставяме маркера
+      new Marker({
         position: propertyLocation,
         map: map,
         title: `41°37'28.9"N 23°11'21.8"E`,
-        animation: google.maps.Animation.DROP
       });
+
     } catch (err: any) {
       console.error('Грешка при зареждане на Google Maps:', err);
     }
