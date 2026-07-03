@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { GuestHouseMapComponent } from './GuestHouseMapComponent';
 
 interface HouseFeature {
   title: string;
@@ -11,7 +12,7 @@ interface HouseFeature {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, GuestHouseMapComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
