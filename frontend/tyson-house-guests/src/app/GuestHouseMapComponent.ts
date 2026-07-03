@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 @Component({
   selector: 'app-guest-house-map',
   standalone: true,
