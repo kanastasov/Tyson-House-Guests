@@ -22,8 +22,6 @@
     </div>
   </header>
 
-
-
   <h2 class="section-title">{{ uiText[currentLang].secDistribution }}</h2>
 
   <div class="card-grid">
@@ -102,6 +100,9 @@
     </div>
   </section>
 
+
+  
+
   <section class="map-section">
     <app-guest-house-map [lang]="currentLang"></app-guest-house-map>
   </section>
@@ -118,6 +119,10 @@
         <span class="price-per-person">{{ uiText[currentLang].pricePerPerson }}</span>
         <span class="price-promo" [innerHTML]="uiText[currentLang].pricePromo"></span>
       </div>
+
+      <section>
+        <app-booking-calendar></app-booking-calendar>
+      </section>
 
       <div class="contact-buttons">
         <a href="tel:+359879260460" class="btn-contact phone-btn">
@@ -146,4 +151,6 @@
       </div>
     </div>
   </section>
+
+ 
 </div>

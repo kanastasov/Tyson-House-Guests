@@ -1,0 +1,19 @@
+<div class="booking-container">
+    <h2>Book Your Stay</h2>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="bookingForm" [rangePicker]="picker" [dateFilter]="dateFilter">
+            <input matStartDate formControlName="start" placeholder="Check-in date">
+            <input matEndDate formControlName="end" placeholder="Check-out date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <div class="actions">
+        <button (click)="submitBooking()" [disabled]="!bookingForm.value.start || !bookingForm.value.end">
+            Reserve Now
+        </button>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GuestHouseMapComponent } from './GuestHouseMapComponent';
+import { BookingCalendarComponent } from './booking-calendar';
 
 interface TranslatableText {
   title: string;
@@ -21,7 +22,7 @@ interface HouseFeature {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, GuestHouseMapComponent],
+  imports: [CommonModule, GuestHouseMapComponent, BookingCalendarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
