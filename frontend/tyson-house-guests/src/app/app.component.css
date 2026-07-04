@@ -667,3 +667,722 @@ body {
         /* Увеличаваме широчината на сектора за цената */
     }
 }
+
+/* Core Styling & Modern Reset */
+:root {
+    --primary-color: #1a3636;
+    /* Premium Deep Forest Slate */
+    --accent-color: #c7a87e;
+    /* Elegant Warm Gold/Champagne */
+    --text-dark: #2c3e50;
+    /* Polished Off-Black */
+    --text-muted: #626262;
+    /* Refined Gray */
+    --bg-light: #f9f8f6;
+    /* Soft Cream/Off-White */
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-light);
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    font-family: 'Playfair Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.main-header {
+    text-align: center;
+    padding: 60px 20px 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.header-content {
+    max-width: 750px;
+    margin: 0 auto 40px auto;
+}
+
+/* Модерна значка над заглавието */
+.sub-badge {
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #c7a87e;
+    /* Елегантен златист/бежов тон */
+    background-color: rgba(199, 168, 126, 0.1);
+    padding: 6px 16px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Основно заглавие - Архитектурен стил */
+.hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3rem;
+    /* Голям, впечатляващ шрифт */
+    font-weight: 700;
+    color: #1a3636;
+    /* Твоето луксозно тъмно зелено */
+    line-height: 1.2;
+    margin: 0 0 15px 0;
+}
+
+/* Фина разделителна линия под заглавието за премиум усещане */
+.title-divider {
+    width: 60px;
+    height: 3px;
+    background-color: #c7a87e;
+    margin: 0 auto 25px auto;
+    border-radius: 2px;
+}
+
+/* Описание */
+.hero-description {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.2rem;
+    color: #5a6e6e;
+    /* Мек, неутрален цвят, който не натоварва окото */
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Акцентиране върху ключовите думи */
+.hero-description strong {
+    color: #1a3636;
+    font-weight: 600;
+}
+/* 
+.house-hero-wrapper {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(26, 54, 54, 0.08);
+    background-color: #ffffff;
+} */
+
+.house-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* .house-hero-wrapper:hover .house-hero-img {
+    transform: scale(1.015);
+} */
+
+/* Адаптивност за по-малки екрани (Телефони) */
+@media (max-width: 600px) {
+    .main-header {
+        padding: 30px 15px 20px 15px;
+    }
+
+    /* Намаляваме размера и гарантираме, че няма да излезе извън екрана */
+    .hero-title {
+        font-size: 1.8rem !important;
+        /* Намаляваме на 1.8rem, за да се събере на един или два чисти реда */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        padding: 0 10px;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 0 5px;
+    }
+
+    /* Оправяме и значката над заглавието да не е твърде голяма */
+    .sub-badge {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+    }
+}
+
+.main-header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.main-header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Clean Professional Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 40px;
+}
+
+/* Luxury Property Cards */
+.card {
+    background: #ffffff;
+    border-radius: 0px;
+    /* Sharp, modern high-end architectural look */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(26, 54, 54, 0.08);
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .card-img {
+    transform: scale(1.04);
+}
+
+/* Premium Tag overlay (e.g., "Guest Favorite" or "Entire House") */
+.property-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(26, 54, 54, 0.9);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Card Content Typography */
+.card-content {
+    padding: 28px;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.card-content p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+/* Subtle Link Button */
+.details-link {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+.details-link:hover {
+    color: var(--primary-color);
+}
+.house-hero-wrapper {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(26, 54, 54, 0.08);
+    background-color: #ffffff;
+    margin-top: 35px;
+}
+
+.house-hero-img {
+    width: 70%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.house-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+/* Общ стил за двете снимки - те се застъпват абсолютно */
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Първоначално втората снимка е напълно скрита */
+.hover-img {
+    opacity: 0;
+}
+
+/* Ефект при посочване (Hover) */
+.card:hover .default-img {
+    /* Ако има втора снимка, първата леко избледнява или се скрива */
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+
+.card:hover .hover-img {
+    /* Втората снимка става видима и се показва плавно най-отгоре */
+    opacity: 1;
+    transform: scale(1.03);
+}
+
+/* Стил за контейнера с цената */
+.price-container {
+    background-color: #f9f8f6;
+    /* Мек фон, който контрастира на бялата карта */
+    padding: 15px 25px;
+    border-radius: 4px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 30px;
+    border: 1px dashed var(--accent-color);
+    /* Стилен акцент около цената */
+}
+
+.price-label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.price-amount {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.price-amount small {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+/* Стилове за секцията със социални мрежи */
+.social-links {
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.social-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 15px !important;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.social-icon.fb {
+  color: #1877f2;
+  background-color: rgba(24, 119, 242, 0.08);
+}
+.social-icon.fb:hover {
+  background-color: #1877f2;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.social-icon.ig {
+  color: #e1306c;
+  background-color: rgba(225, 48, 108, 0.08);
+}
+.social-icon.ig:hover {
+  background-color: #e1306c;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.social-icon.tt {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.social-icon.tt:hover {
+  background-color: #000000;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Контейнер за бутоните */
+.contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 440px;
+    margin: 0 auto 25px auto;
+    width: 100%;
+}
+
+/* Основна споделена стилизация за двата бутона */
+.btn-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px;
+    border-radius: 12px;
+    /* Модерни заоблени краища */
+    text-decoration: none;
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ефекти при задържане на мишката (Hover) */
+.btn-contact:hover {
+    transform: translateY(-3px);
+    /* Леко повдигане */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn-contact:active {
+    transform: translateY(-1px);
+}
+
+/* Големина на иконките (емоджитата) */
+.btn-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+/* Текстове вътре в бутоните */
+.btn-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn-number,
+.btn-subtext {
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 2px;
+}
+
+/* ИНДИВИДУАЛЕН СТИЛ ЗА БУТОНА ЗА ОБАЖДАНЕ (Елегантно тъмно зелено/Premium Slate) */
+.phone-btn {
+    background: linear-gradient(135deg, #1a3636, #2c4e4e);
+    /* Луксозен преливащ цвят */
+    color: #ffffff;
+    border: none;
+}
+
+.phone-btn:hover {
+    background: linear-gradient(135deg, #244949, #376161);
+}
+
+/* ИНДИВИДУАЛЕН СТИЛ ЗА БУТОНА ЗА ЧАТ (Стилен контрастен дизайн с акцентен цвят) */
+.chat-btn {
+    background-color: #ffffff;
+    color: #1a3636;
+    border: 2px solid #1a3636;
+}
+
+.chat-btn:hover {
+    background-color: #f9f8f6;
+    border-color: #c7a87e;
+    /* Променя границата към златисто при ховър */
+    color: #c7a87e;
+}
+
+/* Подреждане в две колони на по-големи екрани (Таблети и компютри) */
+@media (min-width: 600px) {
+    .contact-buttons {
+        flex-direction: row;
+        max-width: 100%;
+    }
+
+    .btn-contact {
+        flex: 1;
+        max-width: 260px;
+        height: 90px;
+        /* Фиксирана височина за еднаквост */
+    }
+}
+
+/* Стилизация на новата секция за региона */
+.region-section {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: -10px;
+    margin-bottom: 40px;
+}
+
+.region-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+
+.region-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 30px 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 54, 54, 0.02);
+    text-align: left;
+}
+
+.region-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(26, 54, 54, 0.06);
+    border-color: #c7a87e;
+    /* Златист акцент при посочване */
+}
+
+.region-emoji {
+    font-size: 2.2rem;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.region-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin: 0 0 10px 0;
+}
+
+.region-card p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    color: #5a6e6e;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Адаптивност: 2 колони за таблети и 4 колони за големи екрани */
+@media (min-width: 650px) {
+    .region-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1000px) {
+    .region-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Стил за банера "Очаквайте скоро" */
+.coming-soon-banner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(199, 168, 126, 0.08);
+    /* Нежен златист нюанс */
+    border: 1px dashed #c7a87e;
+    /* Фина пунктирана рамка за акцент */
+    border-radius: 12px;
+    padding: 16px 24px;
+    max-width:950px;
+    margin: 30px auto 10px auto;
+    /* Центриране и отстояния */
+    text-align: left;
+}
+
+.banner-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.banner-text {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.05rem;
+    color: #1a3636;
+    /* Твоето тъмно зелено */
+    line-height: 1.5;
+}
+
+.banner-text strong {
+    font-weight: 600;
+}
+
+/* Адаптивност за мобилни телефони */
+@media (max-width: 600px) {
+    .coming-soon-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        margin: 20px 15px 5px 15px;
+    }
+}
+
+/* Новите стилове за детайлите около цената */
+.price-per-person {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    color: #c7a87e;
+    /* Елегантен златист цвят */
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.price-promo {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    color: #1a3636;
+        margin-bottom: 22px;
+    /* Увеличено отстояние, за да не се лепи за горния текст */
+    background-color: rgba(26, 54, 54, 0.05);
+    padding: 6px 10px;
+    /* Малко повече вътрешно пространство за по-добър вид */
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.price-promo strong {
+    color: #d32f2f;
+    /* Лек червен или по-ярък акцент за промоцията */
+    font-weight: 700;
+}
+
+/* Малка корекция за десктоп, за да има място за допълнителния текст */
+@media (min-width: 768px) {
+    .price-box {
+        min-width: 260px;
+        /* Увеличаваме широчината на сектора за цената */
+    }
+}
+
+.main-header {
+    position: relative;
+}
+
+.lang-switcher {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.lang-switcher button {
+    border: 1px solid rgba(26, 54, 54, 0.15);
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-color);
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(8px);
+}
+
+.lang-switcher button:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent-color);
+}
+
+.lang-switcher button.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .lang-switcher {
+        top: 12px;
+        right: 12px;
+    }
+
+    .lang-switcher button {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
