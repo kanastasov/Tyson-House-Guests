@@ -5,7 +5,8 @@
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [formGroup]="bookingForm" [rangePicker]="picker" [dateFilter]="dateFilter">
             <input matStartDate formControlName="start" placeholder="Check-in date">
-            <input matEndDate formControlName="end" placeholder="Check-out date">
+
+            <input matEndDate formControlName="end" placeholder="Check-out date" (dateChange)="onDateRangeSelected()">
         </mat-date-range-input>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
