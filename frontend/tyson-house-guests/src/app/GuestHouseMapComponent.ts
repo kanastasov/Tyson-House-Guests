@@ -1,5 +1,7 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { environment } from '../environments/environment.prod';
+
+type Lang = 'bg' | 'en';
 
 @Component({
   selector: 'app-guest-house-map',
@@ -7,7 +9,7 @@ import { environment } from '../environments/environment.prod';
   template: `
     <div style="padding: 20px; max-width: 1200px; margin: 0 auto;">
       <h3 style="text-align: center; margin-bottom: 20px; font-size: 1.8rem;">
-        Къде се намираме
+        {{ text.title }}
       </h3>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
@@ -18,35 +20,35 @@ import { environment } from '../environments/environment.prod';
 
         <div style="display: flex; flex-direction: column; justify-content: center;">
           <h4 style="font-size: 1.4rem; margin-bottom: 10px;">
-            Точни Координати
+            {{ text.coordsTitle }}
           </h4>
 
           <p style="font-size: 1.2rem; color: #4285F4; font-weight: bold; margin-bottom: 15px;">
-            📍 41.627221394772825, 23.19162813199282
+            📍 {{ propertyLocation.lat }}, {{ propertyLocation.lng }}
           </p>
 
           <p>
-            Село Микрево се намира в Югозападна България, само на няколко минути от град Сандански и с директен достъп от магистрала "Струма".
+            {{ text.description }}
           </p>
 
           <ul style="line-height: 1.8; padding-left: 20px;">
             <li>
-              <strong>С автомобил:</strong> Хванете отбивката за Микрево/Струмяни от А3. Къщата е в тихата горна част на селото.
+              <strong>{{ text.byCarLabel }}:</strong> {{ text.byCar }}
             </li>
             <li>
-              <strong>Път:</strong> Изцяло асфалтиран и достъпен за всякакви автомобили.
+              <strong>{{ text.roadLabel }}:</strong> {{ text.road }}
             </li>
             <li>
-              <strong>Паркинг:</strong> Безплатни паркоместа в затворения двор на къщата.
+              <strong>{{ text.parkingLabel }}:</strong> {{ text.parking }}
             </li>
           </ul>
 
           <a
-            href="https://maps.google.com/?q=41.627221394772825,23.19162813199282"
+            [href]="mapLink"
             target="_blank"
             style="display: inline-block; margin-top: 15px; padding: 12px 24px; background-color: #4285F4; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; text-align: center; max-width: 250px;"
           >
-            📍 Навигация в Google Maps
+            📍 {{ text.navigate }}
           </a>
         </div>
       </div>
@@ -55,6 +57,49 @@ import { environment } from '../environments/environment.prod';
 })
 export class GuestHouseMapComponent implements AfterViewInit {
   @ViewChild('mapContainer', { static: false }) mapElement!: ElementRef;
+
+  @Input() lang: Lang = 'bg';
+
+  propertyLocation = {
+    lat: 41.627221394772825,
+    lng: 23.19162813199282,
+  };
+
+  get mapLink() {
+    return `https://maps.google.com/?q=${this.propertyLocation.lat},${this.propertyLocation.lng}`;
+  }
+
+  get text() {
+    return this.lang === 'bg'
+      ? {
+          title: 'Къде се намираме',
+          coordsTitle: 'Точни Координати',
+          description:
+            'Село Микрево се намира в Югозападна България, само на няколко минути от град Сандански и с директен достъп от магистрала "Струма".',
+          byCarLabel: 'С автомобил',
+          byCar:
+            'Хванете отбивката за Микрево/Струмяни от А3. Къщата е в тихата горна част на селото.',
+          roadLabel: 'Път',
+          road: 'Изцяло асфалтиран и достъпен за всякакви автомобили.',
+          parkingLabel: 'Паркинг',
+          parking: 'Безплатни паркоместа в затворения двор на къщата.',
+          navigate: 'Навигация в Google Maps',
+        }
+      : {
+          title: 'Where we are located',
+          coordsTitle: 'Exact Coordinates',
+          description:
+            'Mikrevo village is located in Southwestern Bulgaria, just a few minutes from Sandanski and with direct access from the Struma highway.',
+          byCarLabel: 'By car',
+          byCar:
+            'Take the exit for Mikrevo/Strumyani from A3. The house is in the quiet upper part of the village.',
+          roadLabel: 'Road',
+          road: 'Fully asphalted and accessible for all types of vehicles.',
+          parkingLabel: 'Parking',
+          parking: 'Free parking spaces in the enclosed yard.',
+          navigate: 'Open in Google Maps',
+        };
+  }
 
   async ngAfterViewInit() {
     try {
@@ -68,23 +113,18 @@ export class GuestHouseMapComponent implements AfterViewInit {
       const { Map } = (await importLibrary('maps')) as any;
       const { Marker } = (await importLibrary('marker')) as any;
 
-      const propertyLocation = {
-        lat: 41.627221394772825,
-        lng: 23.19162813199282,
-      };
-
       const map = new Map(this.mapElement.nativeElement, {
-        center: propertyLocation,
+        center: this.propertyLocation,
         zoom: 16,
       });
 
       new Marker({
-        position: propertyLocation,
-        map: map,
+        position: this.propertyLocation,
+        map,
         title: 'Guest House Location',
       });
     } catch (err: any) {
-      console.error('Грешка при зареждане на Google Maps:', err);
+      console.error('Google Maps error:', err);
     }
   }
 }
