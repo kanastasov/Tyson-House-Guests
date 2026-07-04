@@ -125,7 +125,26 @@ export class AppComponent {
           description: 'Clean and modern bathroom with a toilet, located on the same floor. It is used completely privately and exclusively by your group.'
         }
       }
+    },
+    {
+      imageUrl: 'assets/barbequeue.jpg',
+      translations: {
+        bg: {
+          title: 'Комодо барбекю с дървени въглища',
+          category: 'Удобства',
+          specs: 'Комодо барбекю • Дървени въглища • Външна трапезария',
+          description: 'На разположение на гостите е висококачествено Комодо барбекю на дървени въглища, идеално за приготвяне на месо, риба и зеленчуци с автентичен опушен вкус. Пространството около барбекюто предлага удобни места за сядане и приятни вечери на открито със семейство и приятели.'
+        },
+        en: {
+          title: 'Kamado Charcoal BBQ',
+          category: 'Amenities',
+          specs: 'Kamado BBQ • Charcoal Grill • Outdoor Dining Area',
+          description: 'Guests can enjoy a premium Kamado charcoal barbecue, perfect for cooking meat, fish, and vegetables with an authentic smoky flavor. The surrounding outdoor area provides comfortable seating for relaxing evenings and shared meals with family and friends.'
+        }
+      }
     }
+
+
   ];
 
   // 2. ОБЕКТЪТ СЪС СТАТИЧНИТЕ ТЕКСТОВЕ ЗА СТРАНИЦАТА
