@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { CommonModule } from '@angular/common';
-import { provideAnimations } from '@angular/platform-browser/animations'; // 1. Import this
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+// Interface representing the booking payload structural match for Spring Boot
+interface BookingPayload {
+  startDate: Date | null;
+  endDate: Date | null;
+  totalNights: number | null;
+}
 
 @Component({
   selector: 'app-booking-calendar',
@@ -17,40 +25,80 @@ import { provideAnimations } from '@angular/platform-browser/animations'; // 1. 
     MatNativeDateModule
   ],
   providers: [
-    provideAnimations() // 2. Add this here to completely eliminate the NG05105 error locally
+    provideAnimations() // Eliminates the NG05105 missing animation provider error locally
   ],
   templateUrl: './booking-calendar.component.html',
   styleUrls: ['./booking-calendar.component.css']
 })
-export class BookingCalendarComponent {
+export class BookingCalendarComponent implements OnInit {
+  // Injecting HTTP Client and specifying the target Spring Boot API endpoint URL
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:8080/api/bookings';
+
   bookingForm = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
+    start: new FormControl<Date | null>(null, [Validators.required]),
+    end: new FormControl<Date | null>(null, [Validators.required]),
   });
 
   totalNights: number | null = null;
+  bookedDates: Date[] = [];
 
-  bookedDates = [
-    new Date(2026, 6, 10), // July 10, 2026
-    new Date(2026, 6, 11),
-    new Date(2026, 6, 12),
-    new Date(2026, 6, 20),
-    new Date(2026, 6, 21),
-  ];
+  ngOnInit(): void {
+    this.fetchBookedDates();
+  }
 
+  /**
+   * Fetches previously booked dates from Spring Boot to populate the calendar blockages dynamically
+   */
+  fetchBookedDates(): void {
+    this.http.get<any[]>(this.apiUrl).subscribe({
+      next: (bookings) => {
+        // Assuming backend returns an array of bookings with startDate and endDate strings
+        const dates: Date[] = [];
+        bookings.forEach(booking => {
+          const current = new Date(booking.startDate);
+          const end = new Date(booking.endDate);
+          
+          // Populate all dates falling within the reserved range
+          while (current <= end) {
+            dates.push(new Date(current));
+            current.setDate(current.getDate() + 1);
+          }
+        });
+        this.bookedDates = dates;
+      },
+      error: (error) => {
+        console.error('Failed to fetch existing bookings from server:', error);
+      }
+    });
+  }
+
+  /**
+   * Material Filter to disable past dates and already reserved dates within the UI
+   */
   dateFilter = (d: Date | null): boolean => {
-    const time = d?.getTime();
+    if (!d) return false;
+    
+    const time = d.getTime();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     
     // Prevent booking past dates
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    if (d && d < today) return false;
+    if (d < today) return false;
 
     // Prevent booking already taken dates
-    return !this.bookedDates.some(bookedDate => bookedDate.getTime() === time);
+    return !this.bookedDates.some(bookedDate => {
+      // Clear time values to ensure pure date equality check
+      const bd = new Date(bookedDate);
+      bd.setHours(0, 0, 0, 0);
+      return bd.getTime() === time;
+    });
   };
 
-  onDateRangeSelected() {
+  /**
+   * Evaluates the selected range updates and computes night length metrics
+   */
+  onDateRangeSelected(): void {
     const start = this.bookingForm.value.start;
     const end = this.bookingForm.value.end;
 
@@ -69,7 +117,10 @@ export class BookingCalendarComponent {
     }
   }
 
-  checkForInternalBookings(start: Date, end: Date) {
+  /**
+   * Safety fallback checking to ensure an existing reservation is not inside the user's manual selection range
+   */
+  checkForInternalBookings(start: Date, end: Date): void {
     const isInvalidSelection = this.bookedDates.some(bookedDate => {
       return bookedDate > start && bookedDate < end;
     });
@@ -81,9 +132,34 @@ export class BookingCalendarComponent {
     }
   }
 
-  submitBooking() {
-    if (this.bookingForm.valid) {
-      console.log('Booking requested:', this.bookingForm.value, 'Total Nights:', this.totalNights);
+  /**
+   * Submits valid booking records downstream to the Spring Boot REST API endpoint
+   */
+  submitBooking(): void {
+    // 1. Grab the strongly-typed raw object values safely
+    const formValues = this.bookingForm.getRawValue();
+
+    if (this.bookingForm.valid && this.totalNights !== null) {
+      const payload: BookingPayload = {
+        startDate: formValues.start,
+        endDate: formValues.end,
+        totalNights: this.totalNights
+      };
+
+      this.http.post<any>(this.apiUrl, payload).subscribe({
+        next: (response) => {
+          alert('Booking successfully saved to the database!');
+          this.bookingForm.reset();
+          this.totalNights = null;
+          this.fetchBookedDates(); 
+        },
+        error: (error) => {
+          console.error('Error saving booking downstream:', error);
+          alert('Could not submit booking application. Check backend connectivity.');
+        }
+      });
+    } else {
+      alert('Please select a complete and valid date range before submitting.');
     }
   }
 }
