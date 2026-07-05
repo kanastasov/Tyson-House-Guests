@@ -28,7 +28,6 @@ export class BookingCalendarComponent {
     end: new FormControl<Date | null>(null),
   });
 
-  // Track the number of nights selected to bind to your template UI
   totalNights: number | null = null;
 
   bookedDates = [

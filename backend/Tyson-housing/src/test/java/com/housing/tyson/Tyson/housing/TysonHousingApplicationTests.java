@@ -1,10 +1,10 @@
-package com.tyson.house.guests.Tyson.House.Guests;
+package com.housing.tyson.Tyson.housing;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TysonHouseGuestsApplicationTests {
+class TysonHousingApplicationTests {
 
 	@Test
 	void contextLoads() {
