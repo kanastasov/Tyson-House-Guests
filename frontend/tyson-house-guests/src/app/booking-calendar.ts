@@ -9,8 +9,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 // Interface representing the booking payload structural match for Spring Boot
 interface BookingPayload {
-  startDate: Date | null;
-  endDate: Date | null;
+ startDate: string | null;
+  endDate: string | null;
   totalNights: number | null;
 }
 
@@ -47,24 +47,30 @@ export class BookingCalendarComponent implements OnInit {
     this.fetchBookedDates();
   }
 
-  /**
-   * Fetches previously booked dates from Spring Boot to populate the calendar blockages dynamically
+ /**
+   * Fetches previously booked dates from Spring Boot and parses them using local time
    */
   fetchBookedDates(): void {
     this.http.get<any[]>(this.apiUrl).subscribe({
       next: (bookings) => {
-        // Assuming backend returns an array of bookings with startDate and endDate strings
         const dates: Date[] = [];
+        
         bookings.forEach(booking => {
-          const current = new Date(booking.startDate);
-          const end = new Date(booking.endDate);
+          // 1. Break down the string "YYYY-MM-DD" into raw numbers
+          const [sYear, sMonth, sDay] = booking.startDate.split('-').map(Number);
+          const [eYear, eMonth, eDay] = booking.endDate.split('-').map(Number);
+
+          // 2. Create the dates using your browser's absolute LOCAL time
+          // Note: JavaScript months are 0-indexed (January is 0, July is 6)
+          const current = new Date(sYear, sMonth - 1, sDay);
+          const end = new Date(eYear, eMonth - 1, eDay);
           
-          // Populate all dates falling within the reserved range
           while (current <= end) {
             dates.push(new Date(current));
             current.setDate(current.getDate() + 1);
           }
         });
+        
         this.bookedDates = dates;
       },
       error: (error) => {
@@ -74,26 +80,27 @@ export class BookingCalendarComponent implements OnInit {
   }
 
   /**
-   * Material Filter to disable past dates and already reserved dates within the UI
+   * Safe Filter to disable past dates and reserved dates within the UI
    */
   dateFilter = (d: Date | null): boolean => {
     if (!d) return false;
     
-    const time = d.getTime();
+    // Normalize target calendar square to local midnight
+    const time = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
     // Prevent booking past dates
     if (d < today) return false;
 
-    // Prevent booking already taken dates
+    // Block the date if it matches any timestamps in our booked list
     return !this.bookedDates.some(bookedDate => {
-      // Clear time values to ensure pure date equality check
-      const bd = new Date(bookedDate);
-      bd.setHours(0, 0, 0, 0);
+      const bd = new Date(bookedDate.getFullYear(), bookedDate.getMonth(), bookedDate.getDate());
       return bd.getTime() === time;
     });
   };
+
 
   /**
    * Evaluates the selected range updates and computes night length metrics
@@ -132,7 +139,7 @@ export class BookingCalendarComponent implements OnInit {
     }
   }
 
-  /**
+/**
    * Submits valid booking records downstream to the Spring Boot REST API endpoint
    */
   submitBooking(): void {
@@ -140,18 +147,31 @@ export class BookingCalendarComponent implements OnInit {
     const formValues = this.bookingForm.getRawValue();
 
     if (this.bookingForm.valid && this.totalNights !== null) {
+      
+      // Helper function to safely format local dates into standard YYYY-MM-DD strings
+      const formatDateToString = (date: Date | null): string | null => {
+        if (!date) return null;
+        // Shift date by its local timezone offset to avoid it falling back a day during UTC conversion
+        const localOffsetDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+        return localOffsetDate.toISOString().split('T')[0];
+      };
+
+      // 2. Map the form values into a timezone-safe payload structure
       const payload: BookingPayload = {
-        startDate: formValues.start,
-        endDate: formValues.end,
+        startDate: formatDateToString(formValues.start),
+        endDate: formatDateToString(formValues.end),
         totalNights: this.totalNights
       };
 
+      console.log('Sending clean payload to backend:', payload);
+
+      // 3. Post the data to your Spring Boot REST controller
       this.http.post<any>(this.apiUrl, payload).subscribe({
         next: (response) => {
           alert('Booking successfully saved to the database!');
           this.bookingForm.reset();
           this.totalNights = null;
-          this.fetchBookedDates(); 
+          this.fetchBookedDates(); // Refreshes the calendar to block out the new dates immediately!
         },
         error: (error) => {
           console.error('Error saving booking downstream:', error);
