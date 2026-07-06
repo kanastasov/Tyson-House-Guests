@@ -6,10 +6,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
 
 // Interface representing the booking payload structural match for Spring Boot
 interface BookingPayload {
- startDate: string | null;
+  guestName: string;   // Added
+  guestEmail: string;  // Added
+  guestPhone: string;  // Added
+  startDate: string | null;
   endDate: string | null;
   totalNights: number | null;
 }
@@ -22,7 +26,8 @@ interface BookingPayload {
     ReactiveFormsModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatInputModule,
   ],
   providers: [
     provideAnimations() // Eliminates the NG05105 missing animation provider error locally
@@ -35,7 +40,11 @@ export class BookingCalendarComponent implements OnInit {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:8080/api/bookings';
 
+  // Fixed: Added user information form controls to resolve the TS2339 properties error
   bookingForm = new FormGroup({
+    guestName: new FormControl('', [Validators.required]),
+    guestEmail: new FormControl('', [Validators.required, Validators.email]),
+    guestPhone: new FormControl('', [Validators.required]),
     start: new FormControl<Date | null>(null, [Validators.required]),
     end: new FormControl<Date | null>(null, [Validators.required]),
   });
@@ -47,7 +56,7 @@ export class BookingCalendarComponent implements OnInit {
     this.fetchBookedDates();
   }
 
- /**
+  /**
    * Fetches previously booked dates from Spring Boot and parses them using local time
    */
   fetchBookedDates(): void {
@@ -56,12 +65,13 @@ export class BookingCalendarComponent implements OnInit {
         const dates: Date[] = [];
         
         bookings.forEach(booking => {
+          if (!booking.startDate || !booking.endDate) return;
+
           // 1. Break down the string "YYYY-MM-DD" into raw numbers
           const [sYear, sMonth, sDay] = booking.startDate.split('-').map(Number);
           const [eYear, eMonth, eDay] = booking.endDate.split('-').map(Number);
 
           // 2. Create the dates using your browser's absolute LOCAL time
-          // Note: JavaScript months are 0-indexed (January is 0, July is 6)
           const current = new Date(sYear, sMonth - 1, sDay);
           const end = new Date(eYear, eMonth - 1, eDay);
           
@@ -101,7 +111,6 @@ export class BookingCalendarComponent implements OnInit {
     });
   };
 
-
   /**
    * Evaluates the selected range updates and computes night length metrics
    */
@@ -139,9 +148,6 @@ export class BookingCalendarComponent implements OnInit {
     }
   }
 
-/**
-   * Submits valid booking records downstream to the Spring Boot REST API endpoint
-   */
   submitBooking(): void {
     // 1. Grab the strongly-typed raw object values safely
     const formValues = this.bookingForm.getRawValue();
@@ -151,13 +157,15 @@ export class BookingCalendarComponent implements OnInit {
       // Helper function to safely format local dates into standard YYYY-MM-DD strings
       const formatDateToString = (date: Date | null): string | null => {
         if (!date) return null;
-        // Shift date by its local timezone offset to avoid it falling back a day during UTC conversion
         const localOffsetDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
         return localOffsetDate.toISOString().split('T')[0];
       };
 
       // 2. Map the form values into a timezone-safe payload structure
       const payload: BookingPayload = {
+        guestName: formValues.guestName ?? '',   
+        guestEmail: formValues.guestEmail ?? '', 
+        guestPhone: formValues.guestPhone ?? '', 
         startDate: formatDateToString(formValues.start),
         endDate: formatDateToString(formValues.end),
         totalNights: this.totalNights
@@ -179,7 +187,7 @@ export class BookingCalendarComponent implements OnInit {
         }
       });
     } else {
-      alert('Please select a complete and valid date range before submitting.');
+      alert('Please fill out your personal information and select a complete date range before submitting.');
     }
   }
 }

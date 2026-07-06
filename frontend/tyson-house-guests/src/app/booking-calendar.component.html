@@ -1,20 +1,59 @@
 <div class="booking-container">
     <h2>Book Your Stay</h2>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [formGroup]="bookingForm" [rangePicker]="picker" [dateFilter]="dateFilter">
-            <input matStartDate formControlName="start" placeholder="Check-in date">
+    <form [formGroup]="bookingForm" class="booking-form">
 
-            <input matEndDate formControlName="end" placeholder="Check-out date" (dateChange)="onDateRangeSelected()">
-        </mat-date-range-input>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
+        <!-- Guest Name Input -->
+        <mat-form-field appearance="fill">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="guestName" placeholder="Ivan Ivanov">
+            <mat-error *ngIf="bookingForm.get('guestName')?.hasError('required')">
+                Name is required
+            </mat-error>
+        </mat-form-field>
 
-    <div class="actions">
-        <button (click)="submitBooking()" [disabled]="!bookingForm.value.start || !bookingForm.value.end">
-            Reserve Now
-        </button>
-    </div>
+        <!-- Guest Email Input -->
+        <mat-form-field appearance="fill">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" formControlName="guestEmail" placeholder="ivanIvanov@gmail.com">
+            <mat-error *ngIf="bookingForm.get('guestEmail')?.hasError('required')">
+                Email is required
+            </mat-error>
+            <mat-error *ngIf="bookingForm.get('guestEmail')?.hasError('email')">
+                Please enter a valid email address
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Guest Phone Input -->
+        <mat-form-field appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="tel" formControlName="guestPhone" placeholder="+359 88 567 460">
+            <mat-error *ngIf="bookingForm.get('guestPhone')?.hasError('required')">
+                Phone number is required
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Date Range Picker -->
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" [dateFilter]="dateFilter">
+                <input matStartDate formControlName="start" placeholder="Check-in date">
+                <input matEndDate formControlName="end" placeholder="Check-out date"
+                    (dateChange)="onDateRangeSelected()">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+
+        <div class="actions">
+            <button (click)="submitBooking()" [disabled]="bookingForm.get('guestName')?.invalid || 
+                               bookingForm.get('guestEmail')?.invalid || 
+                               bookingForm.get('guestPhone')?.invalid || 
+                               !bookingForm.value.start || 
+                               !bookingForm.value.end">
+                Reserve Now
+            </button>
+        </div>
+
+    </form>
 </div>

@@ -1,6 +1,5 @@
 package com.housing.tyson.Tyson.housing.entity;
 
-
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -8,42 +7,71 @@ import java.time.LocalDate;
 @Table(name = "bookings")
 public class Booking {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private Integer totalNights;
-    private String guestEmail;
-    private String guestName;
-    // Getters and Setters
-    
-    
-    public Long getId() { return id; }
-    public String getGuestEmail() {
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private Integer totalNights;
+	private String guestEmail;
+	private String guestName;
+	private String guestPhone;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getGuestEmail() {
 		return guestEmail;
 	}
+
 	public void setGuestEmail(String guestEmail) {
 		this.guestEmail = guestEmail;
 	}
+
 	public String getGuestName() {
 		return guestName;
 	}
+
 	public void setGuestName(String guestName) {
 		this.guestName = guestName;
 	}
-	public void setId(Long id) { this.id = id; }
 
-    public LocalDate getStartDate() { return startDate; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public LocalDate getEndDate() { return endDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+	public LocalDate getStartDate() {
+		return startDate;
+	}
 
-    public Integer getTotalNights() { return totalNights; }
-    public void setTotalNights(Integer totalNights) { this.totalNights = totalNights; }
-    
-    
-    
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public Integer getTotalNights() {
+		return totalNights;
+	}
+
+	public void setTotalNights(Integer totalNights) {
+		this.totalNights = totalNights;
+	}
+
+	public String getGuestPhone() {
+		return guestPhone;
+	}
+
+	public void setGuestPhone(String guestPhone) {
+		this.guestPhone = guestPhone;
+	}
+
 }
