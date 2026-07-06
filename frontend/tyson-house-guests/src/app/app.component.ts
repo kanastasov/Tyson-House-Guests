@@ -183,7 +183,7 @@ export class AppComponent {
       pricePromo: 'При 2 или повече нощувки: <strong>60€ / нощувка</strong>',
       btnPhone: 'Обади се сега',
       btnChat: 'Пиши ни в чата',
-      socialTitle: 'Свържете се с нас в收циалните мрежи:'
+      socialTitle: 'Свържете се с нас в социалните мрежи:'
     },
     en: {
       badge: 'Private entire floor of a house',
